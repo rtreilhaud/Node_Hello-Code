@@ -1,7 +1,8 @@
 import React from 'react';
+import Register from './pages/Register';
 
 const App = () => {
-	return <p>Hello from client!</p>;
+	return <Register></Register>;
 };
 
 export default App;
