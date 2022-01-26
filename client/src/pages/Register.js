@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import Container from 'react-bootstrap/Container';
@@ -14,6 +15,7 @@ const Register = () => {
 		psw: '',
 		psw2: ''
 	});
+	const history = useHistory();
 	const url = process.env.REACT_APP_API_URL;
 
 	const handleChange = ({ target: { name, value } }) => {
@@ -30,6 +32,7 @@ const Register = () => {
 		try {
 			await axios.post(url + '/users', values);
 			toast.success('Votre inscription a bien été enregistrée');
+			history.push('/login');
 		} catch (error) {
 			if (error.response) {
 				const { data, status } = error.response;
