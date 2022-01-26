@@ -23,9 +23,15 @@ module.exports = class UserAPI {
 	static async postUser(req, res) {
 		try {
 			const response = await UserCtrl.createUser(req.body);
-			res.status(201).json(response);
+			return res.status(201).json(response);
 		} catch (error) {
-			res.status(500).json({ error });
+			if (error.code === 11000) {
+				return res.status(400).json({
+					code: error.code,
+					message: `L'adresse email ${error.keyValue.email} est déjà utilisée par un autre utilisateur`
+				});
+			}
+			res.status(500).json(error);
 		}
 	}
 };
