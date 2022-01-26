@@ -1,12 +1,17 @@
 import React from 'react';
-import Register from './pages/Register';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import Register from './pages/Register';
 
 const App = () => {
 	return (
 		<>
 			<Toaster />
-			<Register />
+			<BrowserRouter>
+				<Switch>
+					<Route exact path='/' component={Register} />
+				</Switch>
+			</BrowserRouter>
 		</>
 	);
 };
