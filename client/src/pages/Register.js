@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
@@ -19,9 +20,27 @@ const Register = () => {
 		setValues({ ...values, [name]: value });
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		axios.post(url + '/register', values);
+
+		if (values.psw !== values.psw2) {
+			return toast.error('Les mots de passe sont différents');
+		}
+
+		try {
+			await axios.post(url + '/users', values);
+			toast.success('Votre inscription a bien été enregistrée');
+		} catch (error) {
+			if (error.response) {
+				const { data, status } = error.response;
+				// Case where the email address is already used
+				if (status === 400 && data.code === 11000) {
+					return toast.error(data.message);
+				}
+				return toast.error(data);
+			}
+			return toast.error(error.message);
+		}
 	};
 
 	return (
