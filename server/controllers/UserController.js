@@ -11,6 +11,16 @@ module.exports = class UserController {
 		});
 	}
 
+	static findUser(query) {
+		return new Promise(async (resolve, reject) => {
+			try {
+				resolve(await User.findOne(query));
+			} catch (error) {
+				reject(error);
+			}
+		});
+	}
+
 	static createUser({ username, email, psw, admin }) {
 		return new Promise(async (resolve, reject) => {
 			try {

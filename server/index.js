@@ -21,6 +21,9 @@ app.get('/', (req, res) => {
 	res.send('Hello from server!');
 });
 
+// Authentication
+app.post('/auth', UserAPI.authenticate);
+
 // TODO: Secure the access to the API (with some admin-only endpoints)
 app.get('/users', UserAPI.getUsers);
 app.post('/users', UserAPI.postUser);
