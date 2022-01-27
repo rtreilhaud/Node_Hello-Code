@@ -5,6 +5,7 @@ const port = process.env.PORT || 8000;
 const cors = require('cors');
 const mongoose = require('mongoose');
 const UserAPI = require('./api/UserAPI');
+const ArticleAPI = require('./api/ArticleAPI');
 
 app.use(express.json()); // Body parser
 app.use(cors()); // CORS policy
@@ -25,8 +26,13 @@ app.get('/', (req, res) => {
 app.post('/auth', UserAPI.authenticate);
 
 // TODO: Secure the access to the API (with some admin-only endpoints)
+// Users
 app.get('/users', UserAPI.getAll);
 app.post('/users', UserAPI.post);
+
+// Articles
+app.get('/articles', ArticleAPI.getAll);
+app.post('/articles', ArticleAPI.post);
 
 app.listen(port, () => {
 	console.log(`Server listening on http://localhost:${port}`);
