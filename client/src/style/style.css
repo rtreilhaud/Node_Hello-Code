@@ -11,8 +11,19 @@ body {
 	color: var(--primary);
 }
 
+h2 {
+	font-size: 1.5rem;
+}
+
 a {
 	color: var(--secondary);
+}
+
+article {
+	border: 2px solid var(--primary);
+	border-radius: 1rem;
+	margin: 1rem auto;
+	padding: 0.5rem;
 }
 
 form {
@@ -32,6 +43,26 @@ fieldset {
 .center {
 	padding: 1rem;
 	text-align: center;
+}
+
+/* Badges for article tags */
+span.badge {
+	margin-left: 0.25rem;
+}
+
+span.badge a {
+	color: white;
+	text-decoration: none;
+}
+
+/* Pagination */
+li.page-item .page-link {
+	color: var(--primary);
+}
+
+li.page-item.active .page-link {
+	background-color: var(--primary);
+	border-color: var(--primary);
 }
 
 /*----------------- Tablet ----------------*/

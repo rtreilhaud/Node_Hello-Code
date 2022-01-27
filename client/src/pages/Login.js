@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
@@ -13,6 +14,7 @@ const Login = ({ setUser }) => {
 		email: '',
 		psw: ''
 	});
+	const history = useHistory();
 	const url = process.env.REACT_APP_API_URL;
 
 	const handleChange = ({ target: { name, value } }) => {
@@ -28,6 +30,7 @@ const Login = ({ setUser }) => {
 			localStorage.setItem('token', token);
 			setUser(jwt_decode(token));
 			toast.success('Connexion réussie');
+			history.push('/');
 		} catch (error) {
 			if (error.response) {
 				const {
@@ -70,7 +73,7 @@ const Login = ({ setUser }) => {
 				<Button type='submit'>Se connecter</Button>
 			</Form>
 			<p>
-				Pas encore inscrit ? <a href='/'>S'inscrire</a>
+				Pas encore inscrit ? <a href='/register'>S'inscrire</a>
 			</p>
 		</Container>
 	);

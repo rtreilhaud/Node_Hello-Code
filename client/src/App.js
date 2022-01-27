@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import jwt_decode from 'jwt-decode';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import ArticleList from './pages/ArticleList';
 
 const App = () => {
 	const [user, setUser] = useState({});
@@ -20,7 +21,8 @@ const App = () => {
 			<Toaster />
 			<BrowserRouter>
 				<Switch>
-					<Route exact path='/' component={Register} />
+					<Route exact path='/' component={ArticleList} />
+					<Route exact path='/register' component={Register} />
 					<Route exact path='/login'>
 						<Login setUser={setUser} />
 					</Route>
