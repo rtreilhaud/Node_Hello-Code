@@ -21,7 +21,7 @@ module.exports = class UserController {
 		});
 	}
 
-	static createUser({ username, email, psw, admin }) {
+	static addUser({ username, email, psw, admin }) {
 		return new Promise(async (resolve, reject) => {
 			try {
 				const newUser = {

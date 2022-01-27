@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const SECRET_KEY = process.env.SECRET_KEY;
 
 module.exports = class UserAPI {
-	static async getUsers(req, res) {
+	static async getAll(req, res) {
 		try {
 			const users = await UserCtrl.getAllUsers();
 			if (!users || users.length === 0) {
@@ -24,9 +24,9 @@ module.exports = class UserAPI {
 		}
 	}
 
-	static async postUser(req, res) {
+	static async post(req, res) {
 		try {
-			const response = await UserCtrl.createUser(req.body);
+			const response = await UserCtrl.addUser(req.body);
 			return res.status(201).json(response);
 		} catch (error) {
 			if (error.code === 11000) {
@@ -41,7 +41,6 @@ module.exports = class UserAPI {
 
 	static async authenticate(req, res) {
 		const { email, psw } = req.body;
-		console.log(req);
 		try {
 			const user = await UserCtrl.findUser({ email: email });
 			// User not found
@@ -61,7 +60,6 @@ module.exports = class UserAPI {
 			res.header('Authorization', 'Bearer ' + token);
 			return res.status(200).json({ message: 'Connexion acceptée', token });
 		} catch (error) {
-			console.log(error);
 			return res.status(500).json(error);
 		}
 	}

@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
 app.post('/auth', UserAPI.authenticate);
 
 // TODO: Secure the access to the API (with some admin-only endpoints)
-app.get('/users', UserAPI.getUsers);
-app.post('/users', UserAPI.postUser);
+app.get('/users', UserAPI.getAll);
+app.post('/users', UserAPI.post);
 
 app.listen(port, () => {
 	console.log(`Server listening on http://localhost:${port}`);
