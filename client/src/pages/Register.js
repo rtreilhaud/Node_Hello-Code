@@ -47,7 +47,7 @@ const Register = () => {
 	};
 
 	return (
-		<Container fluid='lg' className='register'>
+		<Container as='main' fluid='lg' className='register'>
 			<Image src={logo} className='' />
 			<h1>Hello-Code</h1>
 			<p>
