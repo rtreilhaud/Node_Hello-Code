@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import { toast } from 'react-hot-toast';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
@@ -7,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import logo from '../images/logo.png';
 
-const Login = () => {
+const Login = ({ setUser }) => {
 	const [values, setValues] = useState({
 		email: '',
 		psw: ''
@@ -22,7 +23,10 @@ const Login = () => {
 		event.preventDefault();
 
 		try {
-			await axios.post(url + '/auth', values);
+			const res = await axios.post(url + '/auth', values);
+			const { token } = res.data;
+			localStorage.setItem('token', token);
+			setUser(jwt_decode(token));
 			toast.success('Connexion réussie');
 		} catch (error) {
 			if (error.response) {
