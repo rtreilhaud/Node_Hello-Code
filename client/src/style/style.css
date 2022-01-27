@@ -30,6 +30,11 @@ article {
 	padding: 0.5rem;
 }
 
+small {
+	display: block;
+	font-style: italic;
+}
+
 form {
 	border: 2px solid var(--secondary);
 	border-radius: 1rem;
@@ -53,11 +58,9 @@ fieldset {
 	text-align: center;
 }
 
-/* Small text to the right */
-small.align-right {
-	display: block;
-	text-align: end;
-	font-style: italic;
+/* Align the content to the right */
+.align-right {
+	text-align: right;
 }
 
 /* Badges for article tags */

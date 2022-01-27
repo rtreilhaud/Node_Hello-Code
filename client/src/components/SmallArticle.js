@@ -21,7 +21,7 @@ const SmallArticle = ({ article: a }) => {
 				))}
 			</p>
 
-			<small>
+			<small className='align-right'>
 				Publié le {format(new Date(a.createdAt), 'dd/MM/yyyy')}
 				{a.createdAt !== a.updatedAt
 					? `, modifié le ${format(new Date(a.createdAt), 'dd/MM/yyyy')}`
