@@ -7,7 +7,7 @@ const SmallArticle = ({ article: a }) => {
 	return (
 		<article>
 			<h2>
-				<Link to=''>{a.title}</Link>
+				<Link to={`/articles/${a._id}`}>{a.title}</Link>
 			</h2>
 			<p>{a.abstract}</p>
 			<hr />

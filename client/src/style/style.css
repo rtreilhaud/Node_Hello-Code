@@ -11,6 +11,10 @@ body {
 	color: var(--primary);
 }
 
+main {
+	margin: 1rem auto;
+}
+
 h2 {
 	font-size: 1.5rem;
 }
@@ -39,10 +43,21 @@ fieldset {
 
 /***** Classes *****/
 
+/* Flexbox */
+.flex {
+	display: flex;
+}
+
 /* Center the content */
 .center {
-	padding: 1rem;
 	text-align: center;
+}
+
+/* Small text to the right */
+small.align-right {
+	display: block;
+	text-align: end;
+	font-style: italic;
 }
 
 /* Badges for article tags */

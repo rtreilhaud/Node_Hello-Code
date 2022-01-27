@@ -11,6 +11,16 @@ module.exports = class ArticleController {
 		});
 	}
 
+	static getArticleByID(id) {
+		return new Promise(async (resolve, reject) => {
+			try {
+				resolve(await Article.findById(id));
+			} catch (error) {
+				reject(error);
+			}
+		});
+	}
+
 	static addArticle({ title, abstract, tags, textContent, imgContent }) {
 		return new Promise(async (resolve, reject) => {
 			try {

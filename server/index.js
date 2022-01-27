@@ -32,6 +32,7 @@ app.post('/users', UserAPI.post);
 
 // Articles
 app.get('/articles', ArticleAPI.getAll);
+app.get('/articles/:id', ArticleAPI.getByID);
 app.post('/articles', ArticleAPI.post);
 
 app.listen(port, () => {

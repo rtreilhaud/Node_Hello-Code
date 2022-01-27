@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ArticleList from './pages/ArticleList';
+import Article from './pages/Article';
 
 const App = () => {
 	const [user, setUser] = useState({});
@@ -22,6 +23,7 @@ const App = () => {
 			<BrowserRouter>
 				<Switch>
 					<Route exact path='/' component={ArticleList} />
+					<Route exact path='/articles/:article_id' component={Article} />
 					<Route exact path='/register' component={Register} />
 					<Route exact path='/login'>
 						<Login setUser={setUser} />
