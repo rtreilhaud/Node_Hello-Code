@@ -1,29 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import axios from 'axios';
 import { format } from 'date-fns';
 import { toast } from 'react-hot-toast';
 import Container from 'react-bootstrap/esm/Container';
 import Stack from 'react-bootstrap/Stack';
 import Badge from 'react-bootstrap/Badge';
+import { getArticleByID } from '../api/articles';
 
 const Article = () => {
 	const [article, setArticle] = useState({});
 	const match = useRouteMatch();
 	const { article_id } = match.params;
-	const url = process.env.REACT_APP_API_URL;
-
-	const getArticle = async (id) => {
-		try {
-			const { data } = await axios.get(`${url}/articles/${id}`);
-			setArticle({ ...article, ...data });
-		} catch (error) {
-			toast.error(error.message);
-		}
-	};
 
 	useEffect(() => {
-		getArticle(article_id);
+		getArticleByID(article_id)
+			.then((article) => setArticle(article))
+			.catch((error) => toast.error(error.message));
 	}, []);
 
 	return (
