@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 import logo from '../images/logo.png';
+import { signOut } from '../services/authentication';
 
 const NavBar = () => {
 	return (
@@ -18,6 +19,13 @@ const NavBar = () => {
 					<li>
 						<Link to='/' className='nav-link'>
 							Articles
+						</Link>
+					</li>
+				</Nav>
+				<Nav as='ul'>
+					<li>
+						<Link to='/register' className='nav-link' onClick={signOut}>
+							Se déconnecter
 						</Link>
 					</li>
 				</Nav>

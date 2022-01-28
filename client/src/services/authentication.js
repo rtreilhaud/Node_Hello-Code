@@ -54,3 +54,7 @@ export const signIn = (user) => {
 		}
 	});
 };
+
+export const signOut = () => {
+	localStorage.removeItem('token');
+};
