@@ -5,7 +5,6 @@ import { toast } from 'react-hot-toast';
 import Container from 'react-bootstrap/esm/Container';
 import SmallArticle from '../components/SmallArticle';
 import Pagination from '../components/Pagination';
-import NavBar from '../components/NavBar';
 
 const ArticleList = ({ itemsPerPage = 10 }) => {
 	const [articles, setArticles] = useState([]);
@@ -34,22 +33,19 @@ const ArticleList = ({ itemsPerPage = 10 }) => {
 	};
 
 	return (
-		<>
-			<NavBar />
-			<Container as='main' fluid='lg'>
-				<h1>Liste des articles</h1>
-				{articles.slice(pagination.start, pagination.end).map((article) => (
-					<SmallArticle key={article._id} article={article} />
-				))}
-				{articles.length >= itemsPerPage && (
-					<Pagination
-						onChange={handlePageChange}
-						itemsCount={articles.length}
-						itemsPerPage={itemsPerPage}
-					></Pagination>
-				)}
-			</Container>
-		</>
+		<Container as='main' fluid='lg'>
+			<h1>Liste des articles</h1>
+			{articles.slice(pagination.start, pagination.end).map((article) => (
+				<SmallArticle key={article._id} article={article} />
+			))}
+			{articles.length >= itemsPerPage && (
+				<Pagination
+					onChange={handlePageChange}
+					itemsCount={articles.length}
+					itemsPerPage={itemsPerPage}
+				></Pagination>
+			)}
+		</Container>
 	);
 };
 

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import NavBar from './components/NavBar';
+import AuthenticatedRoute from './components/routes/AuthenticatedRoute';
+import UnauthenticatedRoute from './components/routes/UnauthenticatedRoute';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ArticleList from './pages/ArticleList';
 import Article from './pages/Article';
-import { getCurrentUser } from './services/authentication';
+import { getCurrentUser, signOut } from './services/authentication';
 
 const App = () => {
 	const [user, setUser] = useState(null);
@@ -17,17 +20,30 @@ const App = () => {
 		}
 	}, [user]);
 
+	const handleLogout = () => {
+		signOut();
+		setUser(null);
+	};
+
 	return (
 		<>
 			<Toaster />
 			<BrowserRouter>
+				{user && <NavBar onLogout={handleLogout} />}
 				<Switch>
-					<Route exact path='/' component={ArticleList} />
-					<Route exact path='/articles/:article_id' component={Article} />
-					<Route exact path='/register' component={Register} />
-					<Route exact path='/login'>
-						<Login setUser={setUser} />
-					</Route>
+					<AuthenticatedRoute exact path='/' Component={ArticleList} />
+					<AuthenticatedRoute
+						exact
+						path='/articles/:article_id'
+						Component={Article}
+					/>
+					<UnauthenticatedRoute exact path='/register' Component={Register} />
+					<UnauthenticatedRoute
+						exact
+						path='/login'
+						Component={Login}
+						props={{ onLogin: setUser }}
+					/>
 				</Switch>
 			</BrowserRouter>
 		</>

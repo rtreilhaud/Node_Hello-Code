@@ -8,13 +8,12 @@ import Button from 'react-bootstrap/Button';
 import logo from '../images/logo.png';
 import { signIn } from '../services/authentication';
 
-const Login = ({ setUser }) => {
+const Login = ({ onLogin }) => {
 	const [values, setValues] = useState({
 		email: '',
 		psw: ''
 	});
 	const history = useHistory();
-	const url = process.env.REACT_APP_API_URL;
 
 	const handleChange = ({ target: { name, value } }) => {
 		setValues({ ...values, [name]: value });
@@ -25,7 +24,7 @@ const Login = ({ setUser }) => {
 
 		try {
 			const response = await signIn(values);
-			setUser(response.user);
+			onLogin(response.user);
 			toast.success(response.message);
 			history.push('/');
 		} catch (error) {

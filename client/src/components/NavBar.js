@@ -5,9 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 import logo from '../images/logo.png';
-import { signOut } from '../services/authentication';
 
-const NavBar = () => {
+const NavBar = ({ onLogout }) => {
 	return (
 		<Navbar variant='dark' className='navbar'>
 			<Container fluid='lg'>
@@ -24,7 +23,7 @@ const NavBar = () => {
 				</Nav>
 				<Nav as='ul'>
 					<li>
-						<Link to='/register' className='nav-link' onClick={signOut}>
+						<Link to='/register' className='nav-link' onClick={onLogout}>
 							Se déconnecter
 						</Link>
 					</li>
