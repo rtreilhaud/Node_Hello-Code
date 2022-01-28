@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import jwt_decode from 'jwt-decode';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ArticleList from './pages/ArticleList';
 import Article from './pages/Article';
+import { getCurrentUser } from './services/authentication';
 
 const App = () => {
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState(null);
 
 	useEffect(() => {
-		if (Object.keys(user).length === 0) {
-			const token = localStorage.getItem('token');
-			if (token) setUser(jwt_decode(token));
+		if (!user) {
+			const currentUser = getCurrentUser();
+			setUser(currentUser);
 		}
 	}, [user]);
 

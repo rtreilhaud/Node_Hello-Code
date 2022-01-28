@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import logo from '../images/logo.png';
+import { createUser } from '../services/authentication';
 
 const Register = () => {
 	const [values, setValues] = useState({
@@ -16,7 +16,6 @@ const Register = () => {
 		psw2: ''
 	});
 	const history = useHistory();
-	const url = process.env.REACT_APP_API_URL;
 
 	const handleChange = ({ target: { name, value } }) => {
 		setValues({ ...values, [name]: value });
@@ -30,25 +29,17 @@ const Register = () => {
 		}
 
 		try {
-			await axios.post(url + '/users', values);
-			toast.success('Votre inscription a bien été enregistrée');
+			const response = await createUser(values);
+			toast.success(response.message);
 			history.push('/login');
 		} catch (error) {
-			if (error.response) {
-				const { data, status } = error.response;
-				// Case where the email address is already used
-				if (status === 400 && data.code === 11000) {
-					return toast.error(data.message);
-				}
-				return toast.error(data);
-			}
-			return toast.error(error.message);
+			toast.error(error.message);
 		}
 	};
 
 	return (
 		<Container as='main' fluid='lg' className='center'>
-			<Image src={logo} className='' />
+			<Image src={logo} alt='Logo Hello-Code' />
 			<h1>Hello-Code</h1>
 			<p>
 				Cette application contient des articles pour vous aider à maîtriser les
@@ -108,7 +99,7 @@ const Register = () => {
 				<Button type='submit'>S'inscrire</Button>
 			</Form>
 			<p>
-				Déjà inscrit ? <a href='/login'>Se connecter</a>
+				Déjà inscrit ? <Link to='/login'>Se connecter</Link>
 			</p>
 		</Container>
 	);

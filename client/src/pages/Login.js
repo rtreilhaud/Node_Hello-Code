@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import logo from '../images/logo.png';
+import { signIn } from '../services/authentication';
 
 const Login = ({ setUser }) => {
 	const [values, setValues] = useState({
@@ -25,26 +24,18 @@ const Login = ({ setUser }) => {
 		event.preventDefault();
 
 		try {
-			const res = await axios.post(url + '/auth', values);
-			const { token } = res.data;
-			localStorage.setItem('token', token);
-			setUser(jwt_decode(token));
-			toast.success('Connexion réussie');
+			const response = await signIn(values);
+			setUser(response.user);
+			toast.success(response.message);
 			history.push('/');
 		} catch (error) {
-			if (error.response) {
-				const {
-					data: { message }
-				} = error.response;
-				return toast.error(message);
-			}
-			return toast.error(error.message);
+			toast.error(error.message);
 		}
 	};
 
 	return (
 		<Container as='main' fluid='lg' className='center'>
-			<Image src={logo} className='' />
+			<Image src={logo} alt='Logo Hello-Code' />
 			<h1>Hello-Code</h1>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group as='fieldset'>
@@ -73,7 +64,7 @@ const Login = ({ setUser }) => {
 				<Button type='submit'>Se connecter</Button>
 			</Form>
 			<p>
-				Pas encore inscrit ? <a href='/register'>S'inscrire</a>
+				Pas encore inscrit ? <Link to='/register'>S'inscrire</Link>
 			</p>
 		</Container>
 	);
