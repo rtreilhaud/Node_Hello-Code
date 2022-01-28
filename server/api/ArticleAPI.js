@@ -1,9 +1,12 @@
 const ArticleCtrl = require('../controllers/ArticleController');
 
 module.exports = class ArticleAPI {
-	static async getAll(req, res) {
+	static async get(req, res) {
 		try {
-			const articles = await ArticleCtrl.getAllArticles();
+			const { query } = req;
+			const articles = query
+				? await ArticleCtrl.findArticles(query)
+				: await ArticleCtrl.getAllArticles();
 			if (!articles || articles.length === 0) {
 				return res.status(404).json('Aucun article répertorié');
 			}

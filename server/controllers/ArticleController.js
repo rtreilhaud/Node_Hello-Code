@@ -21,6 +21,16 @@ module.exports = class ArticleController {
 		});
 	}
 
+	static findArticles(query) {
+		return new Promise(async (resolve, reject) => {
+			try {
+				resolve(await Article.find(query));
+			} catch (error) {
+				reject(error);
+			}
+		});
+	}
+
 	static addArticle({ title, abstract, tags, textContent, imgContent }) {
 		return new Promise(async (resolve, reject) => {
 			try {

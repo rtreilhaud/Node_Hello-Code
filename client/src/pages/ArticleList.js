@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import Container from 'react-bootstrap/esm/Container';
@@ -11,11 +12,12 @@ const ArticleList = ({ itemsPerPage = 10 }) => {
 		start: 0,
 		end: itemsPerPage
 	});
+	const location = useLocation();
 	const url = process.env.REACT_APP_API_URL;
 
-	const getAllArticles = async () => {
+	const getArticles = async () => {
 		try {
-			const { data } = await axios.get(url + '/articles');
+			const { data } = await axios.get(url + '/articles' + location.search);
 			setArticles(data);
 		} catch (error) {
 			toast.error(error.message);
@@ -23,8 +25,8 @@ const ArticleList = ({ itemsPerPage = 10 }) => {
 	};
 
 	useEffect(() => {
-		getAllArticles();
-	}, []);
+		getArticles();
+	}, [location]);
 
 	const handlePageChange = (start, end) => {
 		setPagination({ start, end });

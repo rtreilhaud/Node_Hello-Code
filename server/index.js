@@ -31,7 +31,7 @@ app.get('/users', UserAPI.getAll);
 app.post('/users', UserAPI.post);
 
 // Articles
-app.get('/articles', ArticleAPI.getAll);
+app.get('/articles', ArticleAPI.get);
 app.get('/articles/:id', ArticleAPI.getByID);
 app.post('/articles', ArticleAPI.post);
 

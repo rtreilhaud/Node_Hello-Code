@@ -47,7 +47,7 @@ const Article = () => {
 							<h2 className='center'>Tags</h2>
 							{article.tags.map((tag) => (
 								<Badge key={tag} bg='secondary'>
-									<Link to=''>{tag}</Link>
+									<Link to={`/?tags=${tag}`}>{tag}</Link>
 								</Badge>
 							))}
 						</Stack>

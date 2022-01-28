@@ -16,7 +16,7 @@ const SmallArticle = ({ article: a }) => {
 				Tags :
 				{a.tags.map((tag) => (
 					<Badge key={tag} bg='secondary'>
-						<Link to=''>{tag}</Link>
+						<Link to={`/?tags=${tag}`}>{tag}</Link>
 					</Badge>
 				))}
 			</p>
