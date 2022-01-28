@@ -38,11 +38,13 @@ const ArticleList = ({ itemsPerPage = 10 }) => {
 			{articles.slice(pagination.start, pagination.end).map((article) => (
 				<SmallArticle key={article._id} article={article} />
 			))}
-			<Pagination
-				onChange={handlePageChange}
-				itemsCount={articles.length}
-				itemsPerPage={itemsPerPage}
-			></Pagination>
+			{articles.length >= itemsPerPage && (
+				<Pagination
+					onChange={handlePageChange}
+					itemsCount={articles.length}
+					itemsPerPage={itemsPerPage}
+				></Pagination>
+			)}
 		</Container>
 	);
 };
