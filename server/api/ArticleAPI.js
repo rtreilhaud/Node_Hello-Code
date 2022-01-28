@@ -38,4 +38,27 @@ module.exports = class ArticleAPI {
 			res.status(500).json(error);
 		}
 	}
+
+	static async getTags(req, res) {
+		try {
+			const articles = await ArticleCtrl.getAllArticles();
+			if (!articles || articles.length === 0) {
+				return res.status(404).json('Aucun article répertorié');
+			}
+			// Get the tags from the articles
+			const tags = articles.reduce((arr, article) => {
+				const { tags } = article;
+				for (const tag of tags) {
+					if (!arr.includes(tag)) {
+						arr.push(tag);
+					}
+				}
+				return arr;
+			}, []);
+			return res.status(200).json(tags);
+		} catch (error) {
+			console.log(error);
+			res.status(500).json({ error });
+		}
+	}
 };

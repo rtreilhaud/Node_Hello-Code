@@ -43,3 +43,24 @@ export const getArticleByID = (id) => {
 		}
 	});
 };
+
+export const getTags = () => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const user = getCurrentUser();
+			const { data } = await axios.get(url + '/tags', {
+				headers: { Authorization: user.token }
+			});
+			resolve(data);
+		} catch (error) {
+			if (error.response) {
+				const {
+					data: { message }
+				} = error.response;
+				if (message) reject({ ...error, message: message });
+			}
+			// TODO: If the token is expired, ask for a new one
+			reject(error);
+		}
+	});
+};

@@ -26,6 +26,11 @@ const NavBar = ({ onLogout }) => {
 								Articles
 							</Link>
 						</li>
+						<li>
+							<Link to='/tags' className='nav-link'>
+								Catégories
+							</Link>
+						</li>
 					</Nav>
 				</Navbar.Collapse>
 				<Nav as='ul' className='right-nav'>

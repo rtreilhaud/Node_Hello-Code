@@ -88,7 +88,8 @@ span.badge {
 	margin-left: 0.25rem;
 }
 
-span.badge a {
+span.badge a,
+.tags button a {
 	color: white;
 	text-decoration: none;
 }
@@ -101,6 +102,17 @@ li.page-item .page-link {
 li.page-item.active .page-link {
 	background-color: var(--primary);
 	border-color: var(--primary);
+}
+
+/* Page '/tags' */
+.tags .flex {
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.tags button {
+	font-size: 1.5rem;
+	margin: 1rem;
 }
 
 /*----------------- Tablet ----------------*/

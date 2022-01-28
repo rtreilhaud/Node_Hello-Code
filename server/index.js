@@ -34,6 +34,7 @@ app.post('/users', UserAPI.post);
 // Articles
 app.get('/articles', checkJWT, ArticleAPI.get);
 app.get('/articles/:id', checkJWT, ArticleAPI.getByID);
+app.get('/tags', checkJWT, ArticleAPI.getTags);
 app.post('/articles', checkJWT, ArticleAPI.post);
 
 app.listen(port, () => {
