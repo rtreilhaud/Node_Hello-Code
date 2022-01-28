@@ -66,6 +66,11 @@ fieldset {
 /* Navigation bar */
 .navbar {
 	background-color: var(--primary);
+	color: white;
+}
+
+.navbar-nav.right-nav {
+	align-items: center;
 }
 
 /* Name of the website */
