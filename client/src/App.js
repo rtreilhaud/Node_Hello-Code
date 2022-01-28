@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import ArticleList from './pages/ArticleList';
 import Article from './pages/Article';
 import TagList from './pages/TagList';
+import UserList from './pages/UserList';
 
 const App = () => {
 	const [user, setUser] = useState(null);
@@ -38,7 +39,8 @@ const App = () => {
 						path='/articles/:article_id'
 						Component={Article}
 					/>
-					<AuthenticatedRoute exact path='/tags/' Component={TagList} />
+					<AuthenticatedRoute exact path='/tags' Component={TagList} />
+					<AuthenticatedRoute exact path='/users' Component={UserList} />
 					<UnauthenticatedRoute exact path='/register' Component={Register} />
 					<UnauthenticatedRoute
 						exact

@@ -32,6 +32,15 @@ const NavBar = ({ onLogout }) => {
 							</Link>
 						</li>
 					</Nav>
+					{user.admin && (
+						<Nav as='ul' className='admin-nav'>
+							<li>
+								<Link to='/users' className='nav-link'>
+									Utilisateurs
+								</Link>
+							</li>
+						</Nav>
+					)}
 				</Navbar.Collapse>
 				<Nav as='ul' className='right-nav'>
 					<li>Connecté.e ({user.username})</li>

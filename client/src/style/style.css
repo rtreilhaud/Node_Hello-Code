@@ -73,6 +73,10 @@ fieldset {
 	align-items: center;
 }
 
+.navbar-nav.admin-nav {
+	background-color: var(--secondary);
+}
+
 /* Name of the website */
 .navbar-brand img {
 	height: 50px;
