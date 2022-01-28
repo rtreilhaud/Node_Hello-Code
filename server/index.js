@@ -6,6 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const UserAPI = require('./api/UserAPI');
 const ArticleAPI = require('./api/ArticleAPI');
+const checkJWT = require('./middlewares/checkJWT');
 
 app.use(express.json()); // Body parser
 app.use(cors()); // CORS policy
@@ -25,15 +26,15 @@ app.get('/', (req, res) => {
 // Authentication
 app.post('/auth', UserAPI.authenticate);
 
-// TODO: Secure the access to the API (with some admin-only endpoints)
+// TODO: Add some admin-only endpoints)
 // Users
-app.get('/users', UserAPI.getAll);
+app.get('/users', checkJWT, UserAPI.getAll);
 app.post('/users', UserAPI.post);
 
 // Articles
-app.get('/articles', ArticleAPI.get);
-app.get('/articles/:id', ArticleAPI.getByID);
-app.post('/articles', ArticleAPI.post);
+app.get('/articles', checkJWT, ArticleAPI.get);
+app.get('/articles/:id', checkJWT, ArticleAPI.getByID);
+app.post('/articles', checkJWT, ArticleAPI.post);
 
 app.listen(port, () => {
 	console.log(`Server listening on http://localhost:${port}`);
